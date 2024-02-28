@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from zip_creator import make_zip
 
 # Create widgets
 
@@ -22,7 +23,10 @@ window = sg.Window("File Compressor",
 
 while True:
     event, values = window.read()
-    print(event, values)
+    filepaths = values["files"].split(";")
+    folder = values["folder"]
+    make_zip(filepaths, folder)
+    window["output"].update(value="Compression completed!")
     match event:
         case sg.WIN_CLOSED:
             break
