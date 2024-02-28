@@ -17,21 +17,25 @@ compress_button = sg.Button("Compress")
 output_label = sg.Text(key="output", text_color="green",
                        background_color="light gray")
 
+extract_button = sg.Button("Extract")
+
 # create window
 
 window = sg.Window("File Compressor",
                    layout=[[label1, input1, choose_button1],
                            [label2, input2, choose_button2],
-                           [compress_button, output_label]],
+                           [compress_button, extract_button, output_label]],
                    background_color="light gray", button_color="royal blue")
 
 while True:
     event, values = window.read()
-    filepaths = values["files"].split(";")
-    print(values)
-    folder = values["folder"]
-    make_zip(filepaths, folder)
-    window["output"].update(value="Compression completed!")
+    if event == "Compress":
+        filepaths = values["files"].split(";")
+        folder = values["folder"]
+        make_zip(filepaths, folder)
+        window["output"].update(value="Compression completed!")
+    elif event == "Extract":
+        window["output"].update(value="Extraction completed!")
     match event:
         case sg.WIN_CLOSED:
             break
