@@ -1,4 +1,4 @@
-import PySimpleGui as sg
+import PySimpleGUI as sg
 
 # Create widgets
 
@@ -20,4 +20,12 @@ window = sg.Window("File Compressor",
                            [label2, input2, choose_button2],
                            [compress_button, output_label]])
 
+while True:
+    event, values = window.read()
+    print(event, values)
+    match event:
+        case sg.WIN_CLOSED:
+            break
+
+window.close()
 
